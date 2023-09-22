@@ -19,7 +19,7 @@ on:
 
 jobs:
   verify:
-    runs-on: debian-latest
+    runs-on: ubuntu-latest
     # needs: ['gather']
     steps:
       - uses: actions/checkout@v3
@@ -41,7 +41,7 @@ jobs:
         run: docker build --build-arg PUPPET_VERSION=latest -t etma/devcontainer-puppet:debian -f ./containers/debian.Dockerfile .
 
   latest:
-    runs-on: debian-latest
+    runs-on: ubuntu-latest
     needs: ['verify']
     if: github.event_name == 'push'
     permissions:
@@ -116,7 +116,7 @@ jobs:
           cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
 
   publish:
-    runs-on: debian-latest
+    runs-on: ubuntu-latest
     needs: ['verify']
     if: github.event_name == 'push'
     permissions:
